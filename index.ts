@@ -42,13 +42,19 @@ const ledger = [
   { func: subtract, params: { a: 6, b: 5 } },
 ];
 
-const result = '';
+const execute = (action) => action.func(action.params);
+
+const result = execute(transaction);
 
 let output = '';
 
-const mappedOutput = [];
+ledger.forEach((action) => (output += `\n OUTPUT: ${execute(action)}`));
 
-const reducedOutput = '';
+const mappedOutput = ledger.map((action) => execute(action));
+
+const reducedOutput = ledger.reduce((output, action) => {
+  return (output += execute(action));
+}, 0);
 
 // How can we execute a single action?
 // How can we execute an array of actions?
